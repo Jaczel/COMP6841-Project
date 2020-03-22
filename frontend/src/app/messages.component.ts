@@ -21,10 +21,9 @@ export class MessagesComponent {
     // Gives us access to our service
     constructor(private webService: WebService) {}
 
-    ngOnInit() {
-        this.webService.getMessages();
+    async ngOnInit() {
+        // Await the promise from web.service and then console log the response
+        var response = await this.webService.getMessages();
+        this.messages = response;
     }
-
-    messages = [{text:'Hi Kat', owner:'Joe'},
-                {text:'Hi Joe', owner:'Kat'}];     
 };
