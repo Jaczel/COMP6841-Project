@@ -4,6 +4,18 @@ Security Project for COMP6841
 
 Using LinkedIn Learning Tutorial on creating a MEAN Stack
 
+### Startup
+
+#### Frontend:
+
+`cd frontend/`
+`ng serve -o`
+
+#### Backend
+
+`cd backend/`
+`nodemon server.js`
+
 ### Setup
 
 - Within `backend/` run `npm install`
