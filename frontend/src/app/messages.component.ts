@@ -1,6 +1,7 @@
 // 22/3/2020. Learnt from LinekdIn Learning
 
 import { Component } from '@angular/core';
+import { WebService } from './web.services';
 
 
 // Components always have a template
@@ -17,6 +18,13 @@ import { Component } from '@angular/core';
 })
 
 export class MessagesComponent {
+    // Gives us access to our service
+    constructor(private webService: WebService) {}
+
+    ngOnInit() {
+        this.webService.getMessages();
+    }
+
     messages = [{text:'Hi Kat', owner:'Joe'},
                 {text:'Hi Joe', owner:'Kat'}];     
 };
