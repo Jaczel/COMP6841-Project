@@ -23,13 +23,13 @@ var api = express.Router();
 
 // Get Route
 api.get('/messages', (req, res) => {
-    res.send(messages);
+    res.json(messages);
 })
 
 // Post Route
 api.post('/message', (req, res) => {
     messages.push(req.body);
-    res.sendStatus(200);
+    res.json(req.body);
 })
 
 // Now we're going to go through '/api/*'

@@ -1,6 +1,6 @@
 // 22/3/2020. Learnt from LinekdIn Learning
 
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { WebService } from './web.services';
 
 
@@ -26,19 +26,16 @@ import { WebService } from './web.services';
 
 export class NewMessageComponent {
 
-    @Output() onPosted = new EventEmitter();
-    
     // Gives us access to our service
     constructor(private webService : WebService) {}
 
     message = {
-        owner:"",
-        text:""
+        owner: "",
+        text: ""
     }
 
     post() {
         this.webService.postMessage(this.message);
-        this.onPosted.emit(this.message);
     }
 
 }
