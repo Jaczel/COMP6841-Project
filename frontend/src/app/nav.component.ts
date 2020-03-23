@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
     selector: 'nav',
     template: `
         <mat-toolbar color="primary">
+            <h1>Something Awesome Project</h1>
             <button mat-button routerLink="/">Message Board</button>
             <button mat-button routerLink="/messages">Messages</button>
         </mat-toolbar>
