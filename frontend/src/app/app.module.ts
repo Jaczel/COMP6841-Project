@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { WebService } from './web.services';
 import { NewMessageComponent } from './new-message.component';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { NewMessageComponent } from './new-message.component';
     AppRoutingModule,
     HttpClientModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule
   ],
   providers: [WebService],
   bootstrap: [AppComponent]

@@ -24,10 +24,9 @@ export class MessagesComponent {
     async ngOnInit() {
         // Await the promise from web.service and then console log the response
         var response = await this.webService.getMessages();
-        console.log(response);
         this.messages = response;
     }
     
-    messages = []
+    messages = [];
 
 };

@@ -1,6 +1,6 @@
 // 22/3/2020. Learnt from LinekdIn Learning
 
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { WebService } from './web.services';
 
 
@@ -11,22 +11,34 @@ import { WebService } from './web.services';
         <mat-card class="card">
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput placeholder="Name">
+                    <input [(ngModel)]="message.owner" matInput placeholder="Name">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea matInput placeholder="Message"></textarea>
+                    <textarea [(ngModel)]="message.text" matInput placeholder="Message"></textarea>
                 </mat-form-field>
                 <mat-card-actions>
-                    <button mat-button color="primary">POST</button>
+                    <button (click)="post()" mat-button color="primary">POST</button>
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>
-
     `
 })
 
 export class NewMessageComponent {
+
+    @Output() onPosted = new EventEmitter();
+    
     // Gives us access to our service
     constructor(private webService : WebService) {}
+
+    message = {
+        owner:"",
+        text:""
+    }
+
+    post() {
+        this.webService.postMessage(this.message);
+        this.onPosted.emit(this.message);
+    }
 
 }
