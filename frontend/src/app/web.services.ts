@@ -10,6 +10,6 @@ export class WebService {
     constructor(private http: HttpClient) {}
 
     getMessages() {
-            return this.http.get('http://localhost:8000/messages').toPromise();
+        return this.http.get<Object[]>('http://localhost:8000/api/messages').toPromise();
     }
 }

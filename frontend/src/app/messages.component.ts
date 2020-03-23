@@ -9,7 +9,7 @@ import { WebService } from './web.services';
     selector: 'messages',
     template: `
         <div *ngFor="let message of messages">
-        <mat-card style="margin:8px">
+        <mat-card style="card">
             <mat-card-title>{{message.owner}}:</mat-card-title>
             <mat-card-content>{{message.text}}</mat-card-content>
         </mat-card>
@@ -19,11 +19,15 @@ import { WebService } from './web.services';
 
 export class MessagesComponent {
     // Gives us access to our service
-    constructor(private webService: WebService) {}
+    constructor(private webService : WebService) {}
 
     async ngOnInit() {
         // Await the promise from web.service and then console log the response
         var response = await this.webService.getMessages();
+        console.log(response);
         this.messages = response;
     }
+    
+    messages = []
+
 };
