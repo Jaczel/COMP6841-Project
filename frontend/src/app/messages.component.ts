@@ -2,6 +2,8 @@
 
 import { Component } from '@angular/core';
 import { WebService } from './web.services';
+// Gives us access to the route parameters
+import { ActivatedRoute } from '@angular/router';
 
 
 // Components always have a template
@@ -10,7 +12,7 @@ import { WebService } from './web.services';
     template: `
     <div *ngFor="let message of webService.messages">
         <mat-card style="card">
-            <mat-card-title>{{message.owner}}:</mat-card-title>
+            <mat-card-title [routerLink]="['/messages', message.owner]" style="cursor: pointer">{{message.owner}}:</mat-card-title>
             <mat-card-content>{{message.text}}</mat-card-content>
         </mat-card>
     </div>
@@ -19,5 +21,9 @@ import { WebService } from './web.services';
 
 export class MessagesComponent {
     // Gives us access to our service
-    constructor(public webService : WebService) {}
+    constructor(public webService : WebService, private route: ActivatedRoute) {}
+    ngOnInit(){
+        // Pretty bloated, but just do it
+        console.log(this.route.snapshot.params.name)
+    }
 };
