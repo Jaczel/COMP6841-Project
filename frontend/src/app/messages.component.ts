@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'messages',
     template: `
-    <div *ngFor="let message of webService.messages">
+    <div *ngFor="let message of webService.messages | async">
         <mat-card style="card">
             <mat-card-title [routerLink]="['/messages', message.owner]" style="cursor: pointer">{{message.owner}}:</mat-card-title>
             <mat-card-content>{{message.text}}</mat-card-content>
@@ -22,8 +22,10 @@ import { ActivatedRoute } from '@angular/router';
 export class MessagesComponent {
     // Gives us access to our service
     constructor(public webService : WebService, private route: ActivatedRoute) {}
+
     ngOnInit(){
         // Pretty bloated, but just do it
-        console.log(this.route.snapshot.params.name)
+        var name = this.route.snapshot.params.name;
+        this.webService.getMessages(name);
     }
 };

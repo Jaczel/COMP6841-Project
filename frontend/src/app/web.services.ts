@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpHeaders } from '@angular/common/http';
 //import { MatSnackBar } from '@angular/material/snack-bar';
 
 // @injectable allows us to inject content into our class
@@ -13,30 +14,45 @@ export class WebService {
 
     BASE_URL = 'http://localhost:8000/api';
 
-    messages = [];
+    private messageStore = [];
 
-    constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
-        this.getMessages();
+    private messageSubject = new Subject();
+
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+        })
     }
 
-    async getMessages() {
-        try {
-            var response = await this.http.get<Object[]>(this.BASE_URL + '/messages').toPromise();
-            this.messages = response;
-        } catch (error) {
+    // Create an observable out of the messageSubject
+    messages = this.messageSubject.asObservable();
+
+    constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
+        this.getMessages(null);
+    }
+
+    getMessages(user) {
+        // If user is not valid use an empty character
+        user = (user) ? '/' + user : '';
+        // Subscribing to the 'Observable'. Allows us to listen for a post
+        this.http.get<Object[]>(this.BASE_URL + '/messages' + user).subscribe(response => {
+            // Response handling code
+            this.messageStore = response;
+            // Can observe our message component (allows for updates to messages)
+            this.messageSubject.next(this.messageStore);
+        }, error => {
             this.handleError("Unable to get messages");
-        }
+        });
     }
 
     async postMessage(message) {
-        try { 
-            var response = await this.http.
-                           post(this.BASE_URL + '/message',
-                                message,
-                                {responseType: 'text'}).toPromise()
-            this.messages.push(response);
+        try {
+            var response = await this.http.post(this.BASE_URL + '/messages',
+                                                message, this.httpOptions).toPromise();
+            this.messageStore.push(response);
+            this.messageSubject.next(this.messageStore);
         } catch (error) {
-            this.handleError("Unable to get messages");
+            this.handleError("Unable to post message");
         }
     }
 

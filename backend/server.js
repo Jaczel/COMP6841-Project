@@ -26,8 +26,17 @@ api.get('/messages', (req, res) => {
     res.json(messages);
 })
 
+
+// Expecting a user parameter
+api.get('/messages/:user', (req, res) => {
+    var user = req.params.user;
+    var result = messages.filter(message => message.owner == user);
+
+    res.json(result);
+})
+
 // Post Route
-api.post('/message', (req, res) => {
+api.post('/messages', (req, res) => {
     messages.push(req.body);
     res.json(req.body);
 })
