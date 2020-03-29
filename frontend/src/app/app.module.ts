@@ -13,13 +13,17 @@ import { MessagesComponent } from './messages.component';
 import { AppComponent } from './app.component';
 
 import { WebService } from './web.services';
+import { AuthService } from './auth.service';
 import { NavComponent } from './nav.component';
 import { NewMessageComponent } from './new-message.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { HomeComponent } from './home.component';
+import { RegisterComponent } from './register.component';
+import { LoginComponent } from './login.component';
 
 var routes = [
     {
@@ -33,6 +37,14 @@ var routes = [
     {
         path: 'messages/:name',
         component: MessagesComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     }
 ];
 
@@ -42,7 +54,9 @@ var routes = [
     MessagesComponent,
     NewMessageComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -53,11 +67,15 @@ var routes = [
     MatInputModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSnackBarModule,
     MatToolbarModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [WebService],
+  providers: [
+    WebService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 
