@@ -24,6 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home.component';
 import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
+import { UserComponent } from './user.component'
 
 var routes = [
     {
@@ -45,6 +46,10 @@ var routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'user',
+        component: UserComponent
     }
 ];
 
@@ -56,7 +61,8 @@ var routes = [
     NavComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

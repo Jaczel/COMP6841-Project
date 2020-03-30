@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 // Dealing with the new way that HttpClient works
@@ -25,6 +25,10 @@ export class AuthService {
         return !!localStorage.getItem(this.TOKEN_KEY);
     }
 
+    get tokenHeader() {
+        return new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem(this.TOKEN_KEY));
+    }
+
     login(loginData) {
         this.http.post<User>(this.BASE_URL + '/login', loginData).subscribe(res => {
             this.authenticate(res);
@@ -47,7 +51,7 @@ export class AuthService {
 
     authenticate(res) {
         var authResponse = res;
-        console.log(res)
+
         if(!authResponse.token){
             return;
         }

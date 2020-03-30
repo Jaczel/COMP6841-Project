@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", 
-               "Origin, X-Requested-With, Content-Type, Accept");
+               "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 })
 
@@ -49,6 +49,22 @@ api.get('/messages/:user', (req, res) => {
 api.post('/messages', (req, res) => {
     messages.push(req.body);
     res.json(req.body);
+})
+
+
+// Security Middleware
+// Run checkAuthenticated() before running the route
+api.get('/users/me', checkAuthenticated, (req, res) => {
+    res.json(users[req.user]);
+})
+
+api.post('/users/me', checkAuthenticated, (req, res) => {
+    var user = users[req.user];
+
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+
+    res.json(user);
 })
 
 auth.post('/login', (req, res) => {
@@ -86,6 +102,24 @@ function sendToken(user, res) {
 
 function sendAuthError(res) {
     return res.json({success: false, message: 'email or password incorrect'});
+}
+
+function checkAuthenticated(req, res, next) {
+    if(!req.header('authorization')){
+        return res.status(401).send({message: 'Unauthorized request. Missing authentication header'})
+    }
+    // Skip the 'Bearer ' string
+    var token = req.header('authorization').split(' ')[1]
+
+    var payload = jwt.decode(token, SECRET);
+
+    if(!payload){
+        return res.status(401).send({message: 'Unauthorized request. Invalid authorization parameter'});
+    }
+
+    req.user = payload;
+
+    next();
 }
 
 // Now we're going to go through '/api/*'

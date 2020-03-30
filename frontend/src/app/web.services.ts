@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
 //import { MatSnackBar } from '@angular/material/snack-bar';
 
 // @injectable allows us to inject content into our class
@@ -27,7 +29,7 @@ export class WebService {
     // Create an observable out of the messageSubject
     messages = this.messageSubject.asObservable();
 
-    constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
+    constructor(private http: HttpClient, private _snackBar: MatSnackBar, private auth: AuthService) {
         this.getMessages(null);
     }
 
@@ -54,6 +56,14 @@ export class WebService {
         } catch (error) {
             this.handleError("Unable to post message");
         }
+    }
+
+    getUser() {
+        return this.http.get(this.BASE_URL + '/users/me', {headers: this.auth.tokenHeader});
+    }
+
+    saveUser(userData) {
+        return this.http.post(this.BASE_URL + '/users/me', userData, {headers: this.auth.tokenHeader});
     }
 
     private handleError(error) {

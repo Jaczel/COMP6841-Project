@@ -29,11 +29,6 @@ export class RegisterComponent {
         this.auth.register(this.form.value);
     }
 
-    ///////////////////////
-    // Stub to be used later
-    isValid(control){
-    }
-    ///////////////////////
 }
 
 function matchingFields(field1, field2){
@@ -42,15 +37,3 @@ function matchingFields(field1, field2){
             return { mismatchedFields: true} 
     }
 }
-
-/*
-Used Angular's Validators one instead
-function emailValid() {
-    // Return a function that returns a form control object (we've called it 'control')
-    return control => {
-        var regex = /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/igm;
-
-        return regex.test(control.value) ? null : {invalidEmail: true}
-    }
-}
-*/
