@@ -16,15 +16,20 @@ Using LinkedIn Learning Tutorial on creating a MEAN Stack
 `cd backend/`
 `nodemon server.js`
 
+#### Concurrently
+
+`npm run dev`
+
 ### Setup
 
 - Within `backend/` run `npm install`
 - Within `frontend/` run `npm install`
+- Set the environment variables in `frontend/src/environments/environment.ts`
 
 
 ### Database Structure
 
-Database is using MongoDB.
+Database is currently **NOT** using MongoDB.
 
 ```
 something-awesome
