@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var PORT = 8000;
+var PORT = 8080;
 var jwt = require('jsonwebtoken');
 var SECRET = '123';
 var messages = [
@@ -129,3 +129,4 @@ app.use('/api', api);
 app.use('/auth', auth);
 
 app.listen(PORT);
+// app.listen(PORT, '128.199.190.64');

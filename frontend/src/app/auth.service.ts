@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 // Dealing with the new way that HttpClient works
 // Need to create an interface (model)
@@ -11,7 +12,7 @@ interface User {
 
 @Injectable()
 export class AuthService {
-    BASE_URL = 'http://localhost:8000/auth';
+    BASE_URL = 'http://' + environment.hostEnvironment + ':8080/auth';
     NAME_KEY = 'name';
     TOKEN_KEY = 'token';
     constructor(private http: HttpClient, private router: Router) {}

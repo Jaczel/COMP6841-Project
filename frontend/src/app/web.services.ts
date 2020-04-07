@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { map } from 'rxjs/operators';
-//import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../environments/environment';
 
 // @injectable allows us to inject content into our class
 @Injectable()
@@ -14,7 +14,7 @@ export class WebService {
     // Angular we are specifying with typescript. Will be able to be
     // accessed using this.*
 
-    BASE_URL = 'http://localhost:8000/api';
+    BASE_URL = 'http://' + environment.hostEnvironment + ':8080/api';
 
     private messageStore = [];
 
