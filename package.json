@@ -1,0 +1,25 @@
+{
+  "name": "comp6841-project",
+  "version": "1.0.0",
+  "description": "Something Awesome Project",
+  "scripts": {
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm start",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaczel/COMP6841-Project.git"
+  },
+  "author": "Joe Aczel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jaczel/COMP6841-Project/issues"
+  },
+  "homepage": "https://github.com/Jaczel/COMP6841-Project#readme",
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "jshint": "^2.11.0"
+  },
+  "dependencies": {}
+}
