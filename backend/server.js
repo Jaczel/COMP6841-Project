@@ -47,8 +47,11 @@ api.get('/messages/:user', (req, res) => {
 
 // Post Route
 api.post('/messages', (req, res) => {
-    messages.push(req.body);
-    res.json(req.body);
+    // Hacky way to stop no user posting
+    if (req.body.owner){
+        messages.push(req.body);
+        res.json(req.body);
+    }
 })
 
 
@@ -82,16 +85,17 @@ auth.post('/login', (req, res) => {
     }
 })
 
-auth.post('/register', (req,res)=>{
-    // When ready, move this to database 
-    // system with encryption
-    var index = users.push(req.body) - 1;
-    var user = users[index];
-    user.id = index;
-    // Generate a token
-
-    sendToken(user, res);
-})
+// Removed for assignment
+// auth.post('/register', (req,res)=>{
+//     // When ready, move this to database 
+//     // system with encryption
+//     var index = users.push(req.body) - 1;
+//     var user = users[index];
+//     user.id = index;
+//     // Generate a token
+// 
+//     sendToken(user, res);
+// })
 
 function sendToken(user, res) {
     var token_sign = jwt.sign(user.id, SECRET);
