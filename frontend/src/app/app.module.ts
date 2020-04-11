@@ -22,7 +22,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { HomeComponent } from './home.component';
-import { RegisterComponent } from './register.component';
+// Removed for assignment
+// import { RegisterComponent } from './register.component';
 import { LoginComponent } from './login.component';
 import { UserComponent } from './user.component'
 
@@ -39,10 +40,11 @@ var routes = [
         path: 'messages/:name',
         component: MessagesComponent
     },
-    {
-        path: 'register',
-        component: RegisterComponent
-    },
+    // Removed for assignment
+    // {
+    //     path: 'register',
+    //     component: RegisterComponent
+    // },
     {
         path: 'login',
         component: LoginComponent
@@ -60,7 +62,7 @@ var routes = [
     NewMessageComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent,
+    //RegisterComponent,
     LoginComponent,
     UserComponent
   ],

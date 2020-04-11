@@ -36,14 +36,14 @@ export class AuthService {
         })
     }
 
-    register(user) {
-        // Going with using an Observable with subscribe instead of async await
-        // However, async await would work too.
-        delete user.confirmPassword;
-        this.http.post<User>(this.BASE_URL + '/register', user).subscribe(res => {
-            this.authenticate(res);
-        });
-    }
+    // register(user) {
+    //     // Going with using an Observable with subscribe instead of async await
+    //     // However, async await would work too.
+    //     delete user.confirmPassword;
+    //     this.http.post<User>(this.BASE_URL + '/register', user).subscribe(res => {
+    //         this.authenticate(res);
+    //     });
+    // }
 
     logout() {
         localStorage.removeItem(this.NAME_KEY);
