@@ -14,7 +14,7 @@ export class WebService {
     // Angular we are specifying with typescript. Will be able to be
     // accessed using this.*
 
-    BASE_URL = 'http://' + environment.hostEnvironment + ':8080/api';
+    BASE_URL = 'http://' + 'localhost' + ':8080/api';
 
     private messageStore = [];
 
